@@ -13,14 +13,21 @@ app.get("/", function(req, res){
 
 app.post("/", function(req, res){
   // console.log(req.body.crypto);
-  request("https://apiv2.bitcoinaverage.com/indices/global/ticker/BTCUSD", function(err, res, body){
+  var crypto = req.body.crypto;
+  var fiat = req.body.fiat;
+
+  var baseURl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
+
+  var finalURL = baseURl + crypto + fiat;
+
+  request(finalURL, function(error, response, body){
 
     //Select all data from API with parse
     var data = JSON.parse(body);
     //Select most recent price
     var price = data.last;
 
-    console.log(price);
+    res.send(`<h1>The price of ${crypto} is ${price} ${fiat}.</h1>`);
 
   });
 
