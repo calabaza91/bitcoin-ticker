@@ -1,4 +1,4 @@
-//Bitcoin ticker
+//Bitcoin converter
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
@@ -16,11 +16,19 @@ app.post("/", function(req, res){
   var crypto = req.body.crypto;
   var fiat = req.body.fiat;
 
-  var baseURl = "https://apiv2.bitcoinaverage.com/indices/global/ticker/";
+  //Options object for request module
+  var options = {
+    url: "https://apiv2.bitcoinaverage.com/convert/global",
+    method: "GET",
+    qs: {
+      from:,
+      to:,
+      amount:,
+    }
+  };
 
-  var finalURL = baseURl + crypto + fiat;
 
-  request(finalURL, function(error, response, body){
+  request(options, function(error, response, body){
 
     //Select all data from API with parse
     var data = JSON.parse(body);
