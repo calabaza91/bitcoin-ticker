@@ -31,7 +31,7 @@ app.post("/", function(req, res){
 
     //Writes response
     res.write(`<p>The current date is ${currentDate}</p>`);
-    res.write(`<h1>The price of ${crypto} is ${price} ${fiat}.</h1>`);
+    res.write(`<h1>The current price of ${crypto} is ${price} ${fiat}.</h1>`);
 
     //Sends response (like pressing send when writing an email)
     res.send();
